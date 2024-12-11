@@ -1,0 +1,8 @@
+model_params:
+  activation_name: 'leaky_relu'  # Optional: leaky_relu|tanh|relu|sigmoid
+
+exp_params:
+  lr: 0.001
+  num_epochs: 1000  # 100 for Breast
+  batch_size: 512  # 512 for MIMIC, Credit, 50 for Breast
+  lmd: 0.9 # the weight of embedding loss

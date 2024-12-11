@@ -1,0 +1,5 @@
+dataset: ""  # Optional: MIMIC|Breast|
+split: "unequal_split"
+s1: "FSVD"
+s2: "AE"
+s3-4: "VFL_KD"
