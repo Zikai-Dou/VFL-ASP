@@ -40,19 +40,5 @@
   "active_num_sample": 22500,
   "active_num_feature": 8
     }
-  },
-  "HAPT": {
-    "unequal_split": {
-      "shared_sample_2": 300,
-      "shared_sample_1": 600,
-      "shared_feature_2": 0,
-      "shared_feature_1": 0,
-      "p2_num_sample": 300,
-      "p2_num_feature": 50,
-      "p1_num_sample": 900,
-      "p1_num_feature": 50,
-      "active_num_sample": 900,
-      "active_num_feature": 50
-    }
   }
 }
