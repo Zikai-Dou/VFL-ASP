@@ -72,7 +72,6 @@ class StepTwo:
                 optimizer.step()
 
     def embedding_approximation(self):
-        # p1 = self.X_passive_1.detach().cpu().numpy()
         approximation = self.model.generate(self.X_passive_1)
         combo = np.concatenate([self.X_passive_1.detach().cpu().numpy(), approximation], axis=1)
 
