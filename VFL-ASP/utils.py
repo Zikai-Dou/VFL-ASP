@@ -26,8 +26,6 @@ def load_data(dataset: str, shuffle_columns=False, shuffle_samples=True, random_
                      'marital_status', 'ExpiredHospital', 'LOSdays', 'gender', 'admit_type', 'admit_location']
         data.drop(drop_cols, inplace=True, axis=1)
 
-        # feature_order = ['LOSgroupNum', 'NumNotes', 'NumOutput', 'NumDiagnosis', 'NumRx', 'NumProcEvents', 'TotalNumInteract', 'NumChartEvents', 'NumInput', 'NumLabs', 'NumTransfers', 'NumCPTevents', 'age', 'NumMicroLabs', 'NumCallouts', 'NumProcs']
-
         feature_order = ['LOSgroupNum', 'NumTransfers', 'NumDiagnosis', 'NumCallouts', 'NumChartEvents', 'TotalNumInteract', 'NumProcEvents', 'age', 'NumInput', 'NumNotes', 'NumRx', 'NumMicroLabs', 'NumProcs', 'NumLabs', 'NumCPTevents', 'NumOutput']
 
         data = data[feature_order]
@@ -57,7 +55,6 @@ def load_data(dataset: str, shuffle_columns=False, shuffle_samples=True, random_
         data["diagnosis"] = [1 if i.strip() == "M" else 0 for i in data.diagnosis]
 
         # Define the order of the features
-        # feature_order = ['diagnosis', 'texture_mean', 'concavity_mean', 'concave points_worst', 'texture_worst', 'radius_se', 'area_se', 'symmetry_worst', 'perimeter_se', 'radius_worst', 'concave points_mean', 'fractal_dimension_mean', 'smoothness_se', 'concavity_worst', 'symmetry_se', 'fractal_dimension_worst', 'area_worst', 'compactness_mean', 'concave points_se', 'compactness_se', 'area_mean', 'texture_se', 'fractal_dimension_se', 'smoothness_worst', 'perimeter_worst', 'compactness_worst', 'radius_mean', 'perimeter_mean', 'smoothness_mean', 'symmetry_mean', 'concavity_se']
         feature_order = ['diagnosis', 'area_worst', 'area_mean', 'area_se', 'radius_mean', 'compactness_se', 'smoothness_mean', 'compactness_mean', 'concavity_mean', 'concave points_mean', 'symmetry_mean', 'fractal_dimension_mean', 'radius_se', 'texture_se', 'symmetry_worst', 'fractal_dimension_worst', 'concavity_se', 'concave points_se', 'symmetry_se', 'fractal_dimension_se', 'smoothness_worst', 'compactness_worst', 'concavity_worst', 'concave points_worst', 'smoothness_se', 'perimeter_se', 'texture_worst', 'texture_mean', 'radius_worst', 'perimeter_worst', 'perimeter_mean']
 
         # Ensure the columns are ordered correctly
@@ -186,7 +183,6 @@ def unequal_split(dataset='MIMIC', start_sample=0, start_feature=0, random_seed=
     X, y = load_data(dataset, random_seed=random_seed)
     # For 'MIMIC' dataset, (58976, 15) 4
     # For 'Breast' dataset, (569, 30) 2
-    # For 'HAPT' dataset, (10299, 561) 6
     # For 'Credit' dataset, (30000, 23) 2
 
     num_unique_labels = len(torch.unique(torch.tensor(y)))
@@ -223,14 +219,14 @@ def unequal_split(dataset='MIMIC', start_sample=0, start_feature=0, random_seed=
 
     # Second overlapping samples
     p2_shared = X_passive_2[p2_num_sample - shared_sample_2:p2_num_sample, :]
-    p1_shared_2 = X_passive_1[:shared_sample_2, :p1_num_feature]  # p1_shared = X_passive_1[:shared_sample_2, shared_feature_2:p1_num_feature]
+    p1_shared_2 = X_passive_1[:shared_sample_2, :p1_num_feature]
     X_shared_2 = np.concatenate([p2_shared, p1_shared_2], axis=1)
     y_shared_2 = y_passive_2[p2_num_sample - shared_sample_2:p2_num_sample, :]
     Xs = [p2_shared, p1_shared_2]
 
     # First overlapping samples
     p1_shared_1 = X_passive_1[p1_num_sample - shared_sample_1:p1_num_sample, :]
-    a_shared = X_active[:shared_sample_1, :active_num_feature]  # a_shared = X_active[:shared_sample_1, shared_feature_1:active_num_feature]
+    a_shared = X_active[:shared_sample_1, :active_num_feature]
     X_shared_1 = np.concatenate([p1_shared_1, a_shared], axis=1)
     y_shared_1 = y_active[:shared_sample_1, :]
 
