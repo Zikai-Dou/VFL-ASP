@@ -15,7 +15,6 @@ class Test:
                                    alpha=0.1,
                                    max_iter=1000,
                                    random_state=self.random_state)
-        # early_stopping reduces accuracy !?
 
     def run(self, X, y):
         result = []
